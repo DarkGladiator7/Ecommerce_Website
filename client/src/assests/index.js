@@ -4,4 +4,5 @@ import paymentLogo from "./paymentLogo.png";
 import googleLogo from "./googleLogo.png";
 import githubLogo from "./githubLogo.png";
 import userLogo from './man.png'
-export { logo, cartImg, paymentLogo, googleLogo, githubLogo ,userLogo};
+import logow from './logowhite.png'
+export { logo, cartImg, paymentLogo, googleLogo, githubLogo ,userLogo ,logow};
