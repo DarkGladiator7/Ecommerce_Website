@@ -2,14 +2,20 @@ import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 
 const ProductsCard = ({ product }) => {
-
-  const handleDetails = ()=>{
-    
+  const _id = product.title;
+  const idString = (_id) => {
+    return String(_id).toLowerCase().split(" ").join("");
   };
+  const rootId = idString(_id);
+  console.log(rootId);
+  const handleDetails = () => {};
 
   return (
     <div className="group relative">
-      <div onClick={handleDetails} className="w-full h-96 cursor-pointer overflow-hidden">
+      <div
+        onClick={handleDetails}
+        className="w-full h-96 cursor-pointer overflow-hidden"
+      >
         <img
           className="w-full h-full object-cover group-hover:scale-110 duration-500"
           src={product.image}

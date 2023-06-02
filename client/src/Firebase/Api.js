@@ -5,6 +5,7 @@ export async function productsData() {
     baseURL: "https://darklightindustries-966ec-default-rtdb.firebaseio.com/",
   });
   const products = await instance.get("./products.json")
+  
   ;
   
   return products;
