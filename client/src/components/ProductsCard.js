@@ -1,14 +1,22 @@
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const ProductsCard = ({ product }) => {
+  const navigate = useNavigate();
   const _id = product.title;
   const idString = (_id) => {
     return String(_id).toLowerCase().split(" ").join("");
   };
   const rootId = idString(_id);
-  console.log(rootId);
-  const handleDetails = () => {};
+
+  const handleDetails = () => {
+    navigate(`/product/${rootId}`, {
+      state: {
+        item: product,
+      },
+    });
+  };
 
   return (
     <div className="group relative">
