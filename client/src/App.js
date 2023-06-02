@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
+import Product from "./components/Product";
 import {
   createBrowserRouter,
   Outlet,
@@ -31,16 +32,20 @@ const router = createBrowserRouter([
         loader: productsData,
       },
       {
-        path:'/cart',
-        element:<Cart/>
-      }
+        path: "/product/:id",
+        element: <Product />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
   },
 ]);
 function App() {
   return (
     <div>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   );
 }
