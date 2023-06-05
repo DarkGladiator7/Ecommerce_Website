@@ -41,7 +41,7 @@ export const bazarSlice = createSlice({
       const item = state.productData.find(
         (item) => item._id === action.payload._id
       );
-      if (item) {
+      if (item && item.quantity > 1) {
         item.quantity--;
       }
     },

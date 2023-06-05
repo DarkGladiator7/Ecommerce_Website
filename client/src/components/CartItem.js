@@ -43,7 +43,7 @@ const CartItem = () => {
                   <div className="flex items-center gap-4 text-sm font-semibold">
                     <button
                       onClick={() =>
-                        dispatche(
+                        dispatche( item.quantity === 1 ? deleteItem(item._id) :
                           decrementQuantity({
                             _id: item._id,
                             title: item.title,
@@ -81,16 +81,16 @@ const CartItem = () => {
           );
         })}
       </div>
-      <button
+      {productData.length>0 ?  <button
         onClick={() =>
           dispatche(resetCart()) & toast.error("Your cart is Empty!")
         }
         className="bg-red-500 text-white mt-8 ml-7 py-1 px-6 hover:bg-red-800 duration-300"
       >
         Reset Cart
-      </button>
+      </button> : <p className="bg-red-500 text-white mt-8 ml-7 py-1 px-6 w-44 hover:bg-red-800 duration-300">Cart is Empty :( Add products to Checkout</p>}
       <Link to="/">
-        <button className="mt-8 ml-7 flex items-center gap-1 text-gray-400">
+        <button className="mt-8 ml-7 flex items-center gap-1 text-gray-400 hover:text-black duration-300">
           <span>
             <HiOutlineArrowLeft />{" "}
           </span>

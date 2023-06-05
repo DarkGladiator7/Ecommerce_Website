@@ -15,9 +15,11 @@ const Header = () => {
         </Link>
         <div className="flex items-center gap-8">
           <ul className="flex items-center gap-8">
-            <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
-              Home
-            </li>
+            <Link to="/">
+              <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
+                Home
+              </li>
+            </Link>
             <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
               Pages
             </li>
@@ -31,7 +33,7 @@ const Header = () => {
               Blog
             </li>
           </ul>
-          <Link to='/cart'>
+          <Link to="/cart">
             <div className="relative">
               <img className=" w-8 h-8" src={cartImg} alt="cart" />
               <span className=" absolute w-8 h-6 top-2 left-0 text-sm flex items-center justify-center font-semibold">
