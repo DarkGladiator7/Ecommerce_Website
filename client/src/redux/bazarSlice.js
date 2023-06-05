@@ -22,13 +22,14 @@ export const bazarSlice = createSlice({
     },
     deleteItem: (state, action) => {
       state.productData = state.productData.filter(
-        (item) => item._id !== action.payload._id
+        (item) => item._id !== action.payload
       );
     },
     resetCart: (state) => {
       state.productData = [];
     },
     incrementQuantity: (state, action) => {
+      console.log(state);
       const item = state.productData.find(
         (item) => item._id === action.payload._id
       );
