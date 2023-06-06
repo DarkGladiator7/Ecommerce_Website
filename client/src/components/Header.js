@@ -20,9 +20,11 @@ const Header = () => {
                 Home
               </li>
             </Link>
-            <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
-              Pages
-            </li>
+            <Link to='/addprod'>
+              <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
+                Admin Testing
+              </li>
+            </Link>
             <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
               Shop
             </li>
@@ -41,7 +43,13 @@ const Header = () => {
               </span>
             </div>
           </Link>
-          <img className="w-8 h-8 rounded-full" src={userLogo} alt="userLogo" />
+          <Link to="/login">
+            <img
+              className="w-8 h-8 rounded-full"
+              src={userLogo}
+              alt="userLogo"
+            />
+          </Link>
         </div>
       </div>
     </div>

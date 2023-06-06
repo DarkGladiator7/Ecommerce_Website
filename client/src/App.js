@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import Product from "./components/Product";
+
 import {
   createBrowserRouter,
   Outlet,
@@ -10,6 +11,8 @@ import {
   ScrollRestoration,
 } from "react-router-dom";
 import { productsData } from "./Firebase/Api";
+import Login from "./pages/Login";
+import AddProduct from "./components/AddProducts/AddProduct";
 
 const Layout = () => {
   return (
@@ -40,6 +43,14 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+      {
+        path:'/login',
+        element: <Login/>
+      },
+      {
+        path:'addprod',
+        element:<AddProduct/>
+      }
     ],
   },
 ]);
