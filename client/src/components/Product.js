@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
-
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { addToCart } from "../redux/bazarSlice";
 import { ToastContainer, toast } from "react-toastify";
 
 const Product = () => {
-
+  const dispatch = useDispatch();
   const Location = useLocation();
   const [details, setDetails] = useState({});
   let [baseQty, setBaseQty] = useState(1);
@@ -74,7 +74,7 @@ const Product = () => {
                 </button>
               </div>
             </div>
-            <button onClick={()=>(addToCart({
+            <button onClick={()=>dispatch(addToCart({
               _id: details._id,
               title: details.title,
               image: details.image,

@@ -1,12 +1,12 @@
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
-import { use } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { addToCart } from "../../src/redux/bazarSlice";
 
 const ProductsCard = ({ product }) => {
-  
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const _id = product.title;
   const idString = (_id) => {
@@ -48,7 +48,7 @@ const ProductsCard = ({ product }) => {
             </div>
             <p
               onClick={() =>
-                (
+                dispatch(
                   addToCart({
                     _id: product._id,
                     title: product.title,
