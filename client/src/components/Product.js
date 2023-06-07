@@ -30,7 +30,7 @@ const Product = () => {
             )}
           </div>
         </div>
-        <div className="w-2/5 flex flex-col justify-center gap-12">
+        <div className="w-2/5 flex flex-col justify-center gap-12 ">
           <div>
             <h2 className="text-4xl font-semibold ">{details.title}</h2>
             <div className="flex items-center gap-4 mt-3">
