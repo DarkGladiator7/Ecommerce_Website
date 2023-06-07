@@ -1,11 +1,20 @@
 import React from "react";
 import ProductsCard from "./ProductsCard";
 import { useState, useEffect } from "react";
-import FilterComponent from './FilterComp/FilterComp'
+import FilterComponent from "./FilterComp/FilterComp";
 const Products = ({ products }) => {
   const [productss, setProducts] = useState([]);
+  const [rating, setRating] = useState(null);
   useEffect(() => {
-    if (products) {
+    if (products && rating > 0) {
+      const productList = Object.keys(products)
+        .map((productId) => ({
+          id: productId,
+          ...products[productId],
+        }))
+        .filter((item) => item.rating === rating);
+      setProducts(productList);
+    } else if (products) {
       const productList = Object.keys(products).map((productId) => ({
         id: productId,
         ...products[productId],
@@ -14,7 +23,7 @@ const Products = ({ products }) => {
     } else {
       setProducts([]);
     }
-  }, [products]);
+  }, [products, rating]);
   return (
     <div className="py-10">
       <div className="flex flex-col items-center gap-4">
@@ -30,12 +39,11 @@ const Products = ({ products }) => {
           service, secure transactions, and speedy delivery to your doorstep.
           Explore, shop, and elevate your online shopping journey with us today!
         </p>
-      </div>
-      <div>
-        <div className=" pl-100 flex items-center">
-          <FilterComponent />
+        <div>
+          <FilterComponent setRating={setRating} />
         </div>
       </div>
+
       <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10 ">
         {productss.map((item) => {
           return <ProductsCard key={item._id} product={item} />;

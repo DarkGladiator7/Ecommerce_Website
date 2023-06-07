@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const FilterComponent = () => {
-  const [rating, setRating] = useState(null);
-
+const FilterComponent = ({ setRating }) => {
   const handleRatingChange = (event) => {
     const selectedRating = parseInt(event.target.value);
     setRating(selectedRating);
@@ -13,7 +11,6 @@ const FilterComponent = () => {
       <span className="text-gray-600">Filter by rating:</span>
       <select
         className="py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        value={rating || ''}
         onChange={handleRatingChange}
       >
         <option value="">All</option>
