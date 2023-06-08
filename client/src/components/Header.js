@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Header = () => {
+  const userInfo = useSelector((state) => state.bazar.userInfo);
   const productData = useSelector((state) => state.bazar.productData);
+
+  console.log(userInfo);
   return (
     <div className="w-full h-20 bg-white border-b-[1px] border-b-gray-800 font-titleFont sticky top-0 z-50">
       <div className="max-w-screen-xl h-full mx-auto flex items-center justify-between">
@@ -20,7 +23,7 @@ const Header = () => {
                 Home
               </li>
             </Link>
-            <Link to='/addprod'>
+            <Link to="/addprod">
               <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
                 Admin Testing
               </li>
@@ -46,10 +49,11 @@ const Header = () => {
           <Link to="/login">
             <img
               className="w-8 h-8 rounded-full"
-              src={userLogo}
+              src={userInfo ? userInfo.image : userLogo}
               alt="userLogo"
             />
           </Link>
+          {userInfo && <p>{userInfo.name}</p>}
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ const Layout = () => {
   return (
     <div>
       <Header />
-      <ScrollRestoration/>
+      <ScrollRestoration />
       <Outlet />
       <Footer />
     </div>
@@ -44,13 +44,13 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path:'/login',
-        element: <Login/>
+        path: "/login",
+        element: <Login />,
       },
       {
-        path:'addprod',
-        element:<AddProduct/>
-      }
+        path: "addprod",
+        element: <AddProduct />,
+      },
     ],
   },
 ]);
