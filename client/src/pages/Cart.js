@@ -56,7 +56,7 @@ const Cart = () => {
   }, [productData]);
 
   const handleCheckout = () => {
-    toast.success("Lessgooo");
+    toast.success("Under Development :)");
   };
 
   return (
