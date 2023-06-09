@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { githubLogo, googleLogo } from "../assests";
 import {
   GoogleAuthProvider,
@@ -7,15 +7,23 @@ import {
   signOut,
 } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../redux/bazarSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, loginFromCart, removeUser } from "../redux/bazarSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [cartl, setcart] = useState("");
   const dispatch = useDispatch();
   const auth = getAuth();
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
+  const lFcart = useSelector((state) => state.bazar.loginFromCart);
+  console.log(lFcart);
+
+
+  const handlesetCart = () => {
+    dispatch(loginFromCart(false));
+  };
 
   const handleGoogleLogin = (e) => {
     e.preventDefault();
@@ -36,7 +44,13 @@ const Login = () => {
           })
         );
         setTimeout(() => {
-          navigate("/");
+          console.log(lFcart);
+          if (lFcart) {
+            handlesetCart();
+            navigate("/cart");
+          } else {
+            navigate("/");
+          }
         }, 1500);
         // IdP data available using getAdditionalUserInfo(result)
         // ...
@@ -64,6 +78,7 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
       });
+    dispatch(loginFromCart());
   };
   return (
     <div className="w-full flex flex-col items-center justify-center gap-10 py-20">

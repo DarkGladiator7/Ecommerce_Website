@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   productData: [],
   userInfo: null,
+  loginFromCart: '',
 };
 
 export const bazarSlice = createSlice({
@@ -51,6 +52,9 @@ export const bazarSlice = createSlice({
     removeUser: (state, action) => {
       state.userInfo = null;
     },
+    loginFromCart : (state, action) =>{
+      state.loginFromCart = action.payload;
+    }
   },
 });
 
@@ -62,5 +66,6 @@ export const {
   decrementQuantity,
   addUser,
   removeUser,
+  loginFromCart
 } = bazarSlice.actions;
 export default bazarSlice.reducer;

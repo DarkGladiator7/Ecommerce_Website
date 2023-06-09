@@ -3,20 +3,33 @@ import { useSelector } from "react-redux";
 import { cartbg, userLogo } from "../assests";
 import CartItem from "../components/CartItem";
 import { ToastContainer, toast } from "react-toastify";
-import StripeCheckout from "react-stripe-checkout";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { loginFromCart } from "../redux/bazarSlice";
+
 const Cart = () => {
   const productData = useSelector((state) => state.bazar.productData);
   const userInfo = useSelector((state) => state.bazar.userInfo);
   const [totalAmt, setTotalAmt] = useState("");
   const [payNow, setPayNow] = useState(false);
 
+  const dispatch = useDispatch();
   const payment = async (token) => {
-    await axios.post("http.//localhost:8080/pay", {
-      amount: totalAmt * 100,
-      token: token,
-    });
+    await axios.post(
+      "http://localhost:8080/pay",
+      {
+        amount: totalAmt * 100,
+        token: token,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
+
   useEffect(() => {
     let price = 0;
 
@@ -34,6 +47,7 @@ const Cart = () => {
       toast.error("Please sign in to CheckOut");
     }
   };
+
   return (
     <div>
       <img className="w-full h-60 object-cover" src={cartbg} alt="cartbg" />
@@ -57,24 +71,21 @@ const Cart = () => {
           <p className="font-titleFont font-semibold flex justify-between mt-6">
             Total <span className="text-xl font-bold">$ {totalAmt}</span>
           </p>
-          <button
-            onClick={handleCheckout}
-            className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300"
-          >
-            Proceed to Checkout
-          </button>
-          {payNow && (
-            <div>
-              <StripeCheckout
-                stripeKey="pk_test_51NGgvBSFXWj4YAa54KkjqCWEpxxLqHuu2WMrHVUGHsLD1zqbOvtjsSRpStIoUKwmsU7IcirYVzvwYWcdJMMYLGVW00LJGnpMD1"
-                name="DarkLight Online Shopping"
-                amount={totalAmt * 100}
-                label="Pay to DarkLight"
-                description={`Your Payment amount is $${totalAmt}`}
-                token={payment}
-                email={userInfo.email}
-              />
-            </div>
+
+          {payNow ? (
+            <button
+              onClick={handleCheckout}
+              className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300"
+            >
+              Proceed to Checkout
+            </button>
+          ) : (
+            <button
+              onClick={() => dispatch(loginFromCart(true))}
+              className="text-base  bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300 "
+            >
+              <Link to="/login">Login to Checkout</Link>
+            </button>
           )}
         </div>
       </div>
