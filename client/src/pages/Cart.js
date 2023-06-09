@@ -13,7 +13,7 @@ const Cart = () => {
   const userInfo = useSelector((state) => state.bazar.userInfo);
   const [totalAmt, setTotalAmt] = useState("");
   const [payNow, setPayNow] = useState(false);
-
+  const lFcart = useSelector((state) => state.bazar.loginFromCart);
   const dispatch = useDispatch();
   const payment = async (token) => {
     await axios.post(
@@ -29,6 +29,21 @@ const Cart = () => {
       }
     );
   };
+  console.log(lFcart, payNow);
+  useEffect(() => {
+    if (lFcart) {
+      dispatch(loginFromCart(false));
+      setPayNow(true);
+      return;
+    }
+  }, [lFcart]);
+
+  useEffect(() => {
+    if (userInfo) {
+      setPayNow(true);
+      return;
+    }
+  }, [userInfo]);
 
   useEffect(() => {
     let price = 0;
@@ -41,11 +56,7 @@ const Cart = () => {
   }, [productData]);
 
   const handleCheckout = () => {
-    if (userInfo) {
-      setPayNow(true);
-    } else {
-      toast.error("Please sign in to CheckOut");
-    }
+    toast.success("Lessgooo");
   };
 
   return (
@@ -80,12 +91,14 @@ const Cart = () => {
               Proceed to Checkout
             </button>
           ) : (
-            <button
-              onClick={() => dispatch(loginFromCart(true))}
-              className="text-base  bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300 "
-            >
-              <Link to="/login">Login to Checkout</Link>
-            </button>
+            <Link to="/login">
+              <button
+                onClick={() => dispatch(loginFromCart(true))}
+                className="text-base  bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300 "
+              >
+                Sign in to Checkout
+              </button>
+            </Link>
           )}
         </div>
       </div>

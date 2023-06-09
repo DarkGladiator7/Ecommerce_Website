@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   productData: [],
   userInfo: null,
-  loginFromCart: '',
+  loginFromCart: false,
 };
 
 export const bazarSlice = createSlice({

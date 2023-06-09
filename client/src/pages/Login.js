@@ -12,7 +12,7 @@ import { addUser, loginFromCart, removeUser } from "../redux/bazarSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [cartl, setcart] = useState("");
+  // const [cartl, setcart] = useState("");
   const dispatch = useDispatch();
   const auth = getAuth();
   const navigate = useNavigate();
@@ -20,10 +20,9 @@ const Login = () => {
   const lFcart = useSelector((state) => state.bazar.loginFromCart);
   console.log(lFcart);
 
-
-  const handlesetCart = () => {
-    dispatch(loginFromCart(false));
-  };
+  // const handlesetCart = () => {
+  //   dispatch(loginFromCart(false));
+  // };
 
   const handleGoogleLogin = (e) => {
     e.preventDefault();
@@ -43,10 +42,10 @@ const Login = () => {
             image: user.photoURL,
           })
         );
+
         setTimeout(() => {
           console.log(lFcart);
           if (lFcart) {
-            handlesetCart();
             navigate("/cart");
           } else {
             navigate("/");
@@ -74,6 +73,7 @@ const Login = () => {
       .then(() => {
         toast.success("Log Out Successfully!");
         dispatch(removeUser());
+        dispatch(loginFromCart(false));
       })
       .catch((error) => {
         console.log(error);
