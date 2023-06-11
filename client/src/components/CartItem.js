@@ -48,13 +48,11 @@ const CartItem = () => {
                   <div className="flex items-center gap-4 text-sm font-semibold">
                     <button
                       onClick={() =>
-                        dispatche(
-                          item.quantity === 1
-                            ? deleteItem(item._id) &
-                                toast.error(
-                                  `${item.title} is removed from cart`
-                                )
-                            : decrementQuantity({
+                        item.quantity === 1
+                          ? dispatche(deleteItem(item._id)) &
+                            toast.error(`${item.title} is removed from cart`)
+                          : dispatche(
+                              decrementQuantity({
                                 _id: item._id,
                                 title: item.title,
                                 image: item.image,
@@ -62,7 +60,7 @@ const CartItem = () => {
                                 quantity: 1,
                                 description: item.description,
                               })
-                        )
+                            )
                       }
                       className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                     >
