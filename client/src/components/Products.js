@@ -7,19 +7,9 @@ const Products = ({ products }) => {
   const [rating, setRating] = useState(null);
   useEffect(() => {
     if (products && rating > 0) {
-      const productList = Object.keys(products)
-        .map((productId) => ({
-          id: productId,
-          ...products[productId],
-        }))
-        .filter((item) => item.rating === rating);
-      setProducts(productList);
+      setProducts(products.filter((item) => item.rating === rating));
     } else if (products) {
-      const productList = Object.keys(products).map((productId) => ({
-        id: productId,
-        ...products[productId],
-      }));
-      setProducts(productList);
+      setProducts(products);
     } else {
       setProducts([]);
     }
@@ -54,7 +44,6 @@ const Products = ({ products }) => {
           <h2 class="text-3xl font-bold text-center text-gray-800 mt-8 animate-bounce ">
             No Products Found
           </h2>
-          
         </div>
       )}
     </div>

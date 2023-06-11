@@ -1,7 +1,12 @@
 import React from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { decrementQuantity, incrementQuantity, deleteItem, resetCart } from "../redux/bazarSlice";
+import {
+  decrementQuantity,
+  incrementQuantity,
+  deleteItem,
+  resetCart,
+} from "../redux/bazarSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
@@ -43,8 +48,28 @@ const CartItem = () => {
                   <div className="flex items-center gap-4 text-sm font-semibold">
                     <button
                       onClick={() =>
-                        dispatche( item.quantity === 1 ? deleteItem(item._id) :
-                          decrementQuantity({
+                        dispatche(
+                          item.quantity === 1
+                            ? deleteItem(item._id)
+                            : decrementQuantity({
+                                _id: item._id,
+                                title: item.title,
+                                image: item.image,
+                                price: item.price,
+                                quantity: 1,
+                                description: item.description,
+                              })
+                        )
+                      }
+                      className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
+                    >
+                      -
+                    </button>
+                    <span>{item.quantity}</span>
+                    <button
+                      onClick={() =>
+                        dispatche(
+                          incrementQuantity({
                             _id: item._id,
                             title: item.title,
                             image: item.image,
@@ -56,21 +81,6 @@ const CartItem = () => {
                       }
                       className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                     >
-                      -
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() =>
-                        dispatche(
-                          incrementQuantity({
-                            _id: item._id,
-                            title: item.title,
-                            image: item.image,
-                            price: item.price,
-                            quantity: 1,
-                            description: item.description,
-                          })
-                        )
-                      } className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black">
                       +
                     </button>
                   </div>
@@ -81,14 +91,16 @@ const CartItem = () => {
           );
         })}
       </div>
-      {productData.length>0 ?  <button
+
+      <button
         onClick={() =>
-          dispatche(resetCart()) & toast.error("Your cart is Empty!")
+          dispatche(resetCart()) & toast.error("All items are removed!")
         }
         className="bg-red-500 text-white mt-8 ml-7 py-1 px-6 hover:bg-red-800 duration-300"
       >
         Reset Cart
-      </button> : <p className="bg-red-500 text-white mt-8 ml-7 py-1 px-6 w-44 hover:bg-red-800 duration-300">Cart is Empty :( Add products to Checkout</p>}
+      </button>
+
       <Link to="/">
         <button className="mt-8 ml-7 flex items-center gap-1 text-gray-400 hover:text-black duration-300">
           <span>

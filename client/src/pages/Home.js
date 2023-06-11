@@ -6,9 +6,13 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const data = useLoaderData();
   useEffect(() => {
-    setProducts(data.data);
+    const productList = Object.keys(data.data).map((productId) => ({
+      id: productId,
+      ...data.data[productId],
+    }));
+    setProducts(productList);
   }, [data]);
-
+  console.log(products);
   return (
     <div>
       <Banner />
