@@ -1,52 +1,96 @@
 import React, { useState } from "react";
+import {
+  CardElement,
+  Elements,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-
 const CheckoutForm = () => {
-  const [paymentError, setPaymentError] = useState(null);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post("/api/pay", {
-        // Add your payment data here
-      });
+    if (!stripe || !elements) {
+      setErrorMessage("Error: Stripe.js has not loaded.");
+      return;
+    }
 
-      setPaymentSuccess(true);
-      setPaymentError(null);
-      console.log(response.data); // Process the response from the server
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/create-payment-intent",
+        {
+          amount: 1000,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const { clientSecret } = response.data;
+      // Use the clientSecret to proceed with the payment
+      console.log("Payment successful!", clientSecret);
     } catch (error) {
-      setPaymentError(error.message);
-      setPaymentSuccess(false);
+      setErrorMessage(`Error: ${error.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const stripePromise = loadStripe(
+    "pk_test_51NGgvBSFXWj4YAa54KkjqCWEpxxLqHuu2WMrHVUGHsLD1zqbOvtjsSRpStIoUKwmsU7IcirYVzvwYWcdJMMYLGVW00LJGnpMD1"
+  );
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-      <div className="mb-4">
-        <label
-          className="block mb-2 text-lg font-medium"
-          htmlFor="card-details"
-        >
-          Card details
-        </label>
-        <CardElement
-          options={{ style: { base: { fontSize: "16px" } } }}
-          className="border p-2"
-        />
-      </div>
-      {paymentError && <div className="text-red-500 mb-4">{paymentError}</div>}
-      {paymentSuccess && (
-        <div className="text-green-500 mb-4">Payment successful!</div>
-      )}
-      <button
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-      >
-        Pay
-      </button>
-    </form>
+    <div>
+      <h1>Stripe Checkout</h1>
+      <Elements stripe={stripePromise}>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="card-element"
+              className="block mb-2 font-medium text-gray-700"
+            >
+              Card Details
+            </label>
+            <CardElement
+              id="card-element"
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#424770",
+                    "::placeholder": {
+                      color: "#aab7c4",
+                    },
+                  },
+                  invalid: {
+                    color: "#9e2146",
+                  },
+                },
+              }}
+            />
+          </div>
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          <button
+            type="submit"
+            disabled={!stripe || isLoading}
+            className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md disabled:bg-gray-400"
+          >
+            {isLoading ? "Processing..." : "Pay Now"}
+          </button>
+        </form>
+      </Elements>
+    </div>
   );
 };
 

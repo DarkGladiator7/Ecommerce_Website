@@ -50,7 +50,10 @@ const CartItem = () => {
                       onClick={() =>
                         dispatche(
                           item.quantity === 1
-                            ? deleteItem(item._id)
+                            ? deleteItem(item._id) &
+                                toast.error(
+                                  `${item.title} is removed from cart`
+                                )
                             : decrementQuantity({
                                 _id: item._id,
                                 title: item.title,

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { cartbg, userLogo } from "../assests";
+import { cartbg } from "../assests";
 import CartItem from "../components/CartItem";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+
 import { Link } from "react-router-dom";
 import { loginFromCart } from "../redux/bazarSlice";
 
@@ -16,21 +16,6 @@ const Cart = () => {
   const lFcart = useSelector((state) => state.bazar.loginFromCart);
   const dispatch = useDispatch();
 
-  const payment = async (token) => {
-    await axios.post(
-      "http://localhost:8080/pay",
-      {
-        amount: totalAmt * 100,
-        token: token,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  };
-  console.log(lFcart, payNow);
   useEffect(() => {
     if (lFcart) {
       dispatch(loginFromCart(false));
@@ -56,9 +41,6 @@ const Cart = () => {
     setTotalAmt(price.toFixed(2));
   }, [productData]);
 
-  const handleCheckout = () => {
-    toast.success("Under Development :)");
-  };
   console.log(productData);
   return (
     <div>
@@ -90,12 +72,11 @@ const Cart = () => {
               </p>
 
               {payNow ? (
-                <button
-                  onClick={handleCheckout}
-                  className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300"
-                >
-                  Proceed to Checkout
-                </button>
+                <Link to="/checkout">
+                  <button className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300">
+                    Proceed to Checkout
+                  </button>
+                </Link>
               ) : (
                 <Link to="/login">
                   <button
@@ -107,20 +88,21 @@ const Cart = () => {
                 </Link>
               )}
             </div>
-          </div>{" "}
+          </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center gap-2 ">
           <p className="  text-4xl text-red-600 font-bold w-50 mt-8 mb-8 py-1 px-6 ">
             Your Cart is Empty
           </p>
           <Link to="/">
-            <button className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-7 rounded-full">
+            <button className="bg-teal-500 hover:bg-teal-600 mb-20 text-white font-semibold py-3 px-6 rounded-lg shadow-md">
               Click here to add products
             </button>
           </Link>
         </div>
       )}
+
       <ToastContainer
         position="top-left"
         autoClose={2000}

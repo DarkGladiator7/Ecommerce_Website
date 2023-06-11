@@ -13,6 +13,8 @@ import {
 import { productsData } from "./Firebase/Api";
 import Login from "./pages/Login";
 import AddProduct from "./components/AddProducts/AddProduct";
+import CheckoutForm from "./components/Checkout/Checkout";
+import StripeProvider from "./components/Checkout/StripeProvider";
 
 const Layout = () => {
   return (
@@ -48,8 +50,12 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "addprod",
+        path: "/addprod",
         element: <AddProduct />,
+      },
+      {
+        path: "/checkout",
+        element: <StripeProvider />,
       },
     ],
   },
