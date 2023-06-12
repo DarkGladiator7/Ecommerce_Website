@@ -39,6 +39,7 @@ const CheckoutForm = () => {
       const { clientSecret } = response.data;
       // Use the clientSecret to proceed with the payment
       console.log("Payment successful!", clientSecret);
+      
     } catch (error) {
       setErrorMessage(`Error: ${error.message}`);
     } finally {
