@@ -27,7 +27,7 @@ app.post(
     try {
       const paymentIntent = await stripe.paymentIntents.create({
         amount,
-        currency: "inr", // Replace with your desired currency
+        currency: "usd", // Replace with your desired currency
       });
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.setHeader("Access-Control-Allow-Methods", "POST");

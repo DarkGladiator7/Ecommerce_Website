@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CardElement,
   Elements,
@@ -7,11 +8,28 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import { resetCart } from "../../redux/bazarSlice";
+
+import { useNavigate } from "react-router-dom";
 const CheckoutForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [totalAmt, setTotalAmt] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const productData = useSelector((state) => state.bazar.productData);
+  useEffect(() => {
+    let price = 0;
+
+    productData.map((item) => {
+      price += item.price * item.quantity;
+      return price;
+    });
+    setTotalAmt(parseInt(price));
+  }, [productData]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +45,7 @@ const CheckoutForm = () => {
       const response = await axios.post(
         "http://localhost:8000/create-payment-intent",
         {
-          amount: 1000,
+          amount: totalAmt,
         },
         {
           headers: {
@@ -39,9 +57,14 @@ const CheckoutForm = () => {
       const { clientSecret } = response.data;
       // Use the clientSecret to proceed with the payment
       console.log("Payment successful!", clientSecret);
-      
+      toast.success("Payment Successful!");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+      dispatch(resetCart());
     } catch (error) {
       setErrorMessage(`Error: ${error.message}`);
+      toast.error("Payment Unsuccessful:(");
     } finally {
       setIsLoading(false);
     }
@@ -53,6 +76,7 @@ const CheckoutForm = () => {
 
   return (
     <div>
+      <h2 className="text-xl mb-3">Total Amount: ${totalAmt}</h2>
       <h1>Stripe Checkout</h1>
       <Elements stripe={stripePromise}>
         <form onSubmit={handleSubmit}>
@@ -81,6 +105,7 @@ const CheckoutForm = () => {
               }}
             />
           </div>
+
           {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           <button
             type="submit"
@@ -91,6 +116,18 @@ const CheckoutForm = () => {
           </button>
         </form>
       </Elements>
+      <ToastContainer
+        position="top-left"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
