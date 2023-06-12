@@ -13,10 +13,13 @@ const Home = () => {
     setProducts(productList);
   }, [data]);
   console.log(products);
+
   return (
     <div>
       <Banner />
-      <Products products={products} />
+      <div>
+        <Products products={products} />
+      </div>
     </div>
   );
 };

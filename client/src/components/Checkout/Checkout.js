@@ -59,8 +59,8 @@ const CheckoutForm = () => {
       console.log("Payment successful!", clientSecret);
       toast.success("Payment Successful!");
       setTimeout(() => {
-        navigate("/");
-      }, 1000);
+        navigate("/thankyou");
+      }, 700);
       dispatch(resetCart());
     } catch (error) {
       setErrorMessage(`Error: ${error.message}`);

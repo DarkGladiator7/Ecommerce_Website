@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import AddProduct from "./components/AddProducts/AddProduct";
 import CheckoutForm from "./components/Checkout/Checkout";
 import StripeProvider from "./components/Checkout/StripeProvider";
+import ThankYouPage from "./components/Thankyou";
 
 const Layout = () => {
   return (
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <StripeProvider />,
+      },
+      {
+        path: "/thankyou",
+        element: <ThankYouPage />,
       },
     ],
   },
