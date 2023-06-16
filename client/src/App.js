@@ -10,10 +10,10 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "react-router-dom";
+
 import { productsData } from "./Firebase/Api";
 import Login from "./pages/Login";
 import AddProduct from "./components/AddProducts/AddProduct";
-import CheckoutForm from "./components/Checkout/Checkout";
 import StripeProvider from "./components/Checkout/StripeProvider";
 import ThankYouPage from "./components/Thankyou";
 
