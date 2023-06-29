@@ -76,6 +76,7 @@ const Login = () => {
         toast.success("Log Out Successfully!");
         dispatch(removeUser());
         dispatch(loginFromCart(false));
+        setTimeout(() => navigate("/"), 1500);
       })
       .catch((error) => {
         console.log(error);
@@ -86,8 +87,6 @@ const Login = () => {
     <div className="flex flex-col items-center">
       <LoginForm />
       <div className="w-full flex flex-col items-center justify-center">
-        
-
         <div className="w-full flex items-center justify-center pr-7 gap-7">
           <img className="w-36" src={googleLogo} alt="altlogo" />
 
