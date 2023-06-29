@@ -13,7 +13,7 @@ const ProductsSimple = ({ products }) => {
     }
   }, [products]);
   return (
-    <div className="py-6">
+    <div className="py-2 ">
       {productss.length > 0 ? (
         <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10 ">
           {productss.map((item) => {

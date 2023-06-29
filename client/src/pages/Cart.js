@@ -95,7 +95,7 @@ const Cart = () => {
           <p className="  text-4xl text-red-600 font-bold w-50 mt-8 mb-8 py-1 px-6 ">
             Your Cart is Empty
           </p>
-          <Link to="/">
+          <Link to="/products">
             <button className="bg-teal-500 hover:bg-teal-600 mb-20 text-white font-semibold py-3 px-6 rounded-lg shadow-md">
               Click here to add products
             </button>
