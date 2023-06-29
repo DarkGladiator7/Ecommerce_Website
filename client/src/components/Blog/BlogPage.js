@@ -105,7 +105,7 @@ const BlogPage = () => {
       </div>
       {loading && (
         <div className="text-center text-2xl font-medium mt-4 animate-pulse">
-          <p>Loading more posts...</p>
+          <p>Loading our posts...</p>
         </div>
       )}
     </div>

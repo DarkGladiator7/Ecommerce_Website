@@ -18,6 +18,7 @@ import StripeProvider from "./components/Checkout/StripeProvider";
 import ThankYouPage from "./components/Thankyou";
 import ContactPage from "./components/ContactUs/ContactPage";
 import BlogPage from "./components/Blog/BlogPage";
+import ProductsPage from "./components/ProductsPage/ProductsPage";
 
 const Layout = () => {
   return (
@@ -71,6 +72,11 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <BlogPage />,
+      },
+      {
+        path: "/products",
+        element: <ProductsPage />,
+        loader: productsData,
       },
     ],
   },

@@ -28,12 +28,16 @@ const Header = () => {
                 Admin Testing
               </li>
             </Link>
-            <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
-              Shop
-            </li>
-            <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
-              Blog
-            </li>
+            <Link to="/products">
+              <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
+                Products
+              </li>
+            </Link>
+            <Link to="/blog">
+              <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
+                Blog
+              </li>
+            </Link>
             <Link to="/contactus">
               <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
                 Contact Us
