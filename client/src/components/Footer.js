@@ -32,7 +32,7 @@ const Footer = () => {
         <div>
           <h2 className="text-2xl font-semibold text-white mb-4 ">locate us</h2>
           <div className="text-base flex flex-col gap-1 ">
-            <p>Pearl City,California</p>
+            <p>Chennai, India</p>
             <p>Mobile: 9788823456</p>
             <p>Phone:044-43327986</p>
             <p>e-mail: DarkLightStudios@gmail.com</p>

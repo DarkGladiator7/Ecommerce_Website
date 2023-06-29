@@ -32,11 +32,13 @@ const Header = () => {
               Shop
             </li>
             <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
-              Element
-            </li>
-            <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
               Blog
             </li>
+            <Link to="/contactus">
+              <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
+                Contact Us
+              </li>
+            </Link>
           </ul>
           <Link to="/cart">
             <div className="relative">
