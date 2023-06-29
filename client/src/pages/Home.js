@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../components/Banner";
-import Products from "../components/Products";
+import ProductsSimple from "../components/ProductsSimple";
 import { useLoaderData } from "react-router-dom";
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -10,7 +10,7 @@ const Home = () => {
       id: productId,
       ...data.data[productId],
     }));
-    setProducts(productList);
+    setProducts(productList.slice(0,4));
   }, [data]);
   console.log(products);
 
@@ -18,7 +18,7 @@ const Home = () => {
     <div>
       <Banner />
       <div>
-        <Products products={products} />
+        <ProductsSimple products={products} />
       </div>
     </div>
   );

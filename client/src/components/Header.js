@@ -23,11 +23,11 @@ const Header = () => {
                 Home
               </li>
             </Link>
-            <Link to="/addprod">
+            {/* <Link to="/addprod">
               <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
                 Admin Testing
               </li>
-            </Link>
+            </Link> */}
             <Link to="/products">
               <li className="text-base font-bold hover:text-orange-900 hover:underline underline-offset-2 decoration-[1px] cursor-pointer duration-300 ">
                 Products

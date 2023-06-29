@@ -64,7 +64,7 @@ const Banner = () => {
         <h1 className="text-2x1 bg-black text-white py-2 w-80 text-center">
           Shopping Everyday
         </h1>
-        <p className="max-w-[700px] text-gray-600 text-center">
+        <p className="max-w-[700px] text-gray-600 pt-2 text-center">
           Discover a world of convenience and endless possibilities at DarkLight
           Shopping. Our online marketplace brings you an immersive shopping
           experience like no other, offering an extensive range of high-quality
