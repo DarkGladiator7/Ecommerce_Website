@@ -15,7 +15,15 @@ const ProductsPage = () => {
   console.log(products);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
+      <div className="text-center">
+        <h1 className="text-6xl font-extrabold text-gray-800 leading-tight">
+          Discover Our Exquisite Collection
+        </h1>
+        <p className="mt-4 text-lg text-gray-600">
+          Explore a world of premium products curated just for you
+        </p>
+      </div>
       <Products products={products} />
     </div>
   );

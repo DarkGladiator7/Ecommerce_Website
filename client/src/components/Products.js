@@ -17,7 +17,6 @@ const Products = ({ products }) => {
   return (
     <div className="py-10">
       <div className="flex flex-col items-center gap-4">
-        
         <div>
           <FilterComponent setRating={setRating} />
         </div>
