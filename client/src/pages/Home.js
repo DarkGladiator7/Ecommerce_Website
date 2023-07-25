@@ -26,7 +26,7 @@ const Home = () => {
       <div className="flex justify-center pb-10 relative bottom-4">
         <Link
           to="/products"
-          className="inline-flex items-center py-3 px-8 bg-gray-400 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-700 hover:text-white transition duration-300"
+          className="inline-flex items-center py-3 px-8 bg-gray-400 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-800 hover:text-white transition duration-300"
         >
           <span className="mr-2">
             <FontAwesomeIcon icon={faArrowAltCircleRight} />
